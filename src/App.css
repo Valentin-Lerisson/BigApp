@@ -1,0 +1,141 @@
+/* --- RESET ET POLICES --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.main-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f0f2f9;
+  font-family: "Neue Haas Grotesk Text Pro", "Helvetica Neue", Arial, sans-serif;
+}
+
+.content-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* --- TITRE AUDIENCE INSIGHT --- */
+.main-title { 
+  font-family: 'Archivo Black', sans-serif; /* Police naturellement massive */
+  font-size: 40px;
+  color: #5D30C4;
+  letter-spacing: -2px; /* Pour l'aspect compact "collé" */
+  transform: translateY(-90px);
+  z-index: 5;
+}
+
+/* --- PNG DE DÉCORATION (Dossier Public) --- */
+.png-overlay {
+  position: absolute;
+  /* AJUSTEMENT DU POSITIONNEMENT POUR SUIVRE L'ESPACE */
+  width: 150px;
+  z-index: 4; /* DEVANT LA CARTE */
+  pointer-events: none;
+}
+
+/* --- LA CARTE BLANCHE --- */
+.glass-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 40px;
+  padding: 60px 50px; /* Padding latéral légèrement augmenté */
+  
+  /* ON ÉLARGIT LE CONTENEUR ICI */
+  width: 920px; /* Passé de 820px à 920px pour plus de largeur */
+  
+  text-align: center;
+  z-index: 2; 
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 50px rgba(58, 55, 132, 0.05);
+}
+
+/* --- TEXTES DE LA DIV --- */
+.select-version {
+  color: #7070AA;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.study-title {
+  color: #3A3784;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 70px;
+  letter-spacing: 0.7px
+}
+
+/* --- GRILLE DES STATISTIQUES --- */
+.stats-grid {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.stat-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-header {
+  color: #3A3784;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.stat-info, .stat-value {
+color: #7070AA;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.stat-info { font-size: 13px; font-weight: 400; }
+.stat-value { font-size: 14px; font-weight: 700; }
+
+/* --- SÉPARATEUR --- */
+.separator {
+  width: 130px;
+  height: 0.5px;
+  background-color: #3A3784;
+  margin: 8px 0;
+}
+
+/* --- BOUTON OUVRIR --- */
+.btn-open {
+  background: linear-gradient(135deg, #641BFB, #171FE5);
+  color: white;
+  border: none;
+  padding: 16px 100px;
+  border-radius: 50px;
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  margin-top: 50px;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(100, 27, 251, 0.25);
+  transition: all 0.2s ease;
+}
+
+.btn-open:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 32px rgba(100, 27, 251, 0.35);
+}
