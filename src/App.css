@@ -47,8 +47,10 @@ body {
   z-index: 6;
   pointer-events: none;
   transform: translateY(55px);
+  @media (max-width: 768px) {
+    transform: translateY(30px);
 }
-
+}
 /* --- LA CARTE BLANCHE --- */
 .glass-card {
   position: relative;
