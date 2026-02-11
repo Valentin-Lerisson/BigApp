@@ -25,7 +25,7 @@ function App() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          width: "100%",
+          width: "90%",
           maxWidth: "1200px",
         }}
       >
@@ -52,8 +52,8 @@ function App() {
           alt=""
           sx={{
             position: "absolute",
-            top: { xs: 40, md: 50 },
-            width: { xs: "100px", sm: "140px", md: "185px" },
+            top: { xs: 50, md: 50 },
+            width: { xs: "80px", sm: "140px", md: "180px" },
             zIndex: 6,
             pointerEvents: "none",
           }}
