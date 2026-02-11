@@ -1,4 +1,4 @@
-/* --- RESET ET POLICES --- */
+/* --- RESET ET BASE --- */
 * {
   margin: 0;
   padding: 0;
@@ -6,18 +6,17 @@
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+  background: #f0f2f9;
+  font-family: "Neue Haas Grotesk Text Pro", "Helvetica Neue", Arial, sans-serif;
+  min-height: 100vh;
 }
 
 .main-container {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f0f2f9;
-  font-family: "Neue Haas Grotesk Text Pro", "Helvetica Neue", Arial, sans-serif;
+  padding: 20px; /* Sécurité pour mobile */
 }
 
 .content-wrapper {
@@ -26,25 +25,28 @@ body {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  max-width: 1200px;
 }
 
 /* --- TITRE AUDIENCE INSIGHT --- */
 .main-title { 
-  font-family: 'Archivo Black', sans-serif; /* Police naturellement massive */
-  font-size: 40px;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(28px, 5vw, 40px); /* Taille fluide selon l'écran */
   color: #5D30C4;
-  letter-spacing: -2px; /* Pour l'aspect compact "collé" */
-  transform: translateY(-90px);
+  letter-spacing: -1.5px;
+  margin-bottom: 120px; /* Espace fixe pour laisser place au PNG */
   z-index: 5;
+  text-align: center;
 }
 
-/* --- PNG DE DÉCORATION (Dossier Public) --- */
+/* --- PNG DE DÉCORATION --- */
 .png-overlay {
   position: absolute;
-  /* AJUSTEMENT DU POSITIONNEMENT POUR SUIVRE L'ESPACE */
-  width: 150px;
-  z-index: 4; /* DEVANT LA CARTE */
+  top: 50px;
+  width: clamp(100px, 15vw, 150px); /* Taille s'adapte à l'écran */
+  z-index: 6;
   pointer-events: none;
+  transform: translateY(55px);
 }
 
 /* --- LA CARTE BLANCHE --- */
@@ -54,38 +56,35 @@ body {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: 40px;
-  padding: 60px 50px; /* Padding latéral légèrement augmenté */
-  
-  /* ON ÉLARGIT LE CONTENEUR ICI */
-  width: 920px; /* Passé de 820px à 920px pour plus de largeur */
-  
+  padding: 40px 20px;
+  width: 100%;
+  max-width: 920px; /* Largeur max Desktop */
   text-align: center;
   z-index: 2; 
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 20px 50px rgba(58, 55, 132, 0.05);
 }
 
-/* --- TEXTES DE LA DIV --- */
 .select-version {
   color: #7070AA;
-  font-size: 18px;
-  font-weight: 400;
-  margin-bottom: 20px;
+  font-size: clamp(14px, 2vw, 18px);
+  margin-bottom: 10px;
 }
 
 .study-title {
   color: #3A3784;
-  font-size: 28px;
+  font-size: clamp(20px, 4vw, 28px);
   font-weight: 700;
-  margin-bottom: 70px;
-  letter-spacing: 0.7px
+  margin-bottom: 40px;
 }
 
-/* --- GRILLE DES STATISTIQUES --- */
+/* --- GRILLE DES STATISTIQUES (Responsive) --- */
 .stats-grid {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 50px;
+  flex-direction: row; /* Desktop */
+  justify-content: space-around;
+  gap: 20px;
+  margin-bottom: 40px;
 }
 
 .stat-column {
@@ -97,26 +96,27 @@ body {
 
 .stat-header {
   color: #3A3784;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+  min-height: 40px; /* Aligne les séparateurs horizontalement */
 }
 
-.stat-info, .stat-value {
-color: #7070AA;
-  margin: 0;
-  line-height: 1.2;
+.stat-info, .stat-value, .stat-sub-info {
+  color: #7070AA;
+  line-height: 1.3;
 }
 
-.stat-info { font-size: 13px; font-weight: 400; }
-.stat-value { font-size: 14px; font-weight: 700; }
+.stat-value { font-weight: 700; font-size: 14px; }
+.stat-sub-info { font-size: 11px; }
 
-/* --- SÉPARATEUR --- */
 .separator {
-  width: 130px;
+  width: 80%;
+  max-width: 130px;
   height: 0.5px;
   background-color: #3A3784;
-  margin: 8px 0;
+  opacity: 0.3;
+  margin: 10px 0;
 }
 
 /* --- BOUTON OUVRIR --- */
@@ -124,18 +124,47 @@ color: #7070AA;
   background: linear-gradient(135deg, #641BFB, #171FE5);
   color: white;
   border: none;
-  padding: 16px 100px;
+  padding: 16px clamp(40px, 10vw, 100px);
   border-radius: 50px;
-  font-family: "Helvetica Neue", sans-serif;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 600;
-  margin-top: 50px;
   cursor: pointer;
-  box-shadow: 0 12px 28px rgba(100, 27, 251, 0.25);
-  transition: all 0.2s ease;
+  box-shadow: 0 12px 28px rgba(100, 27, 251, 0.2);
+  transition: transform 0.2s ease;
 }
 
-.btn-open:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 15px 32px rgba(100, 27, 251, 0.35);
+/* --- MEDIA QUERIES (TABLETTE ET MOBILE) --- */
+
+@media (max-width: 768px) {
+  .stats-grid {
+    flex-direction: column; /* On empile les colonnes */
+    gap: 40px;
+  }
+  
+  .glass-card {
+    padding: 30px 15px;
+    margin-top: 20px;
+  }
+
+  .main-title {
+    margin-bottom: 60px;
+  }
+
+  .png-overlay {
+    top: 40px;
+  }
+  
+  .separator {
+    width: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-title {
+    letter-spacing: -1px;
+  }
+  
+  .btn-open {
+    width: 100%; /* Bouton prend toute la largeur sur petit mobile */
+  }
 }

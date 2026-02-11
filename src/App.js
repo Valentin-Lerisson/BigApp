@@ -4,38 +4,33 @@ import "./App.css";
 function App() {
   return (
     <div className="main-container">
-      <div className="content-wrapper">
-        <style>
-          @import
-          url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
-        </style>
-        {/* Titre au-dessus de la div - Très gras */}
-        <h1 className="main-title">
-          <strong>Audience Insight</strong>
-        </h1>
+      {/* Importation de la police propre */}
+      <style>
+        @import
+        url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+      </style>
 
-        {/* Appel direct du PNG depuis le dossier public */}
+      <div className="content-wrapper">
+        <h1 className="main-title">Audience Insight</h1>
+
+        {/* L'image flottante */}
         <img src="/groupe.png" className="png-overlay" alt="" />
 
-        {/* La Div (Carte) */}
         <div className="glass-card">
           <p className="select-version">Sélectionnez une version du projet</p>
           <h2 className="study-title">Étude InterBio</h2>
 
           <div className="stats-grid">
-            {/* Échantillon */}
+            {/* Colonne 1 */}
             <div className="stat-column">
               <h4 className="stat-header">Échantillon</h4>
               <p className="stat-info">16 mots clés</p>
               <div className="separator"></div>
-              <p className="stat-info">
-                <strong>1 542 256</strong>
-                <br />
-                Recherches sur Google
-              </p>
+              <p className="stat-value">1 542 256</p>
+              <p className="stat-sub-info">Recherches sur Google</p>
             </div>
 
-            {/* Période */}
+            {/* Colonne 2 */}
             <div className="stat-column">
               <h4 className="stat-header">Période</h4>
               <p className="stat-info">De Novembre 2023</p>
@@ -43,7 +38,7 @@ function App() {
               <p className="stat-info">À Novembre 2024</p>
             </div>
 
-            {/* Zone Géo */}
+            {/* Colonne 3 */}
             <div className="stat-column">
               <h4 className="stat-header">Zone géographique</h4>
               <p className="stat-info">France</p>
