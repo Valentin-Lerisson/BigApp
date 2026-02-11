@@ -86,7 +86,7 @@ const CustomDropdown = ({ label, value, options }) => {
 };
 
 // ==========================================
-// 1. PAGE D'ACCUEIL (Landing Page)
+// 1. PAGE D'ACCUEIL (Landing Page) - VERSION ADOUCIE
 // ==========================================
 const LandingPage = ({ onOpen }) => (
   <Zoom in={true} timeout={500}>
@@ -97,25 +97,26 @@ const LandingPage = ({ onOpen }) => (
         flexDirection: "column",
         alignItems: "center",
         width: "95%",
-        maxWidth: "1200px",
+        maxWidth: "1000px",
       }}
     >
+      {/* HEADER RÉDUIT */}
       <Box
         sx={{
           position: "relative",
           width: "100%",
           display: "flex",
           justifyContent: "center",
-          mb: { xs: 8, md: 10 },
+          mb: { xs: 4, md: 6 },
         }}
       >
         <Typography
           variant="h1"
           sx={{
             fontFamily: "'Archivo Black', sans-serif",
-            fontSize: { xs: "32px", md: "42px" },
+            fontSize: { xs: "24px", md: "34px" }, // Taille réduite
             color: "#5D30C4",
-            letterSpacing: "-1.5px",
+            letterSpacing: "-1px",
             zIndex: 10,
             textAlign: "center",
           }}
@@ -127,81 +128,84 @@ const LandingPage = ({ onOpen }) => (
           src="/groupe.png"
           sx={{
             position: "absolute",
-            top: "-30px",
-            width: { xs: "90px", md: "140px" },
+            top: "-20px",
+            width: { xs: "70px", md: "110px" }, // Logo réduit
             zIndex: 6,
             pointerEvents: "none",
+            opacity: 0.9,
           }}
         />
       </Box>
+
+      {/* CARTE BLANCHE PLUS FINE */}
       <Box
         sx={{
           position: "relative",
-          background: "rgba(255, 255, 255, 0.4)",
-          backdropFilter: "blur(20px)",
-          borderRadius: "40px",
-          padding: { xs: "30px 20px", md: "60px 45px" },
+          background: "rgba(255, 255, 255, 0.35)", // Plus transparent
+          backdropFilter: "blur(15px)",
+          borderRadius: "35px",
+          padding: { xs: "25px 15px", md: "40px 35px" }, // Padding réduit
           width: "100%",
-          maxWidth: "940px",
+          maxWidth: "780px", // Largeur de carte réduite
           textAlign: "center",
           zIndex: 2,
-          border: "1px solid rgba(255, 255, 255, 0.2)",
-          boxShadow: "0 20px 50px rgba(58, 55, 132, 0.05)",
+          border: "1px solid rgba(255, 255, 255, 0.3)",
+          boxShadow: "0 15px 40px rgba(58, 55, 132, 0.04)",
         }}
       >
         <Typography
           sx={{
             color: "#7070AA",
-            fontSize: "16px",
-            mb: 1,
+            fontSize: "14px",
+            mb: 0.5,
             textTransform: "lowercase",
+            letterSpacing: "0.5px",
           }}
         >
           Sélectionnez une version du projet
         </Typography>
         <Typography
           variant="h2"
-          sx={{ color: "#3A3784", fontSize: "28px", fontWeight: 800, mb: 6 }}
+          sx={{ color: "#3A3784", fontSize: "22px", fontWeight: 800, mb: 4 }}
         >
           Étude InterBio
         </Typography>
+
         <Box
           sx={{
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
             justifyContent: "space-around",
-            gap: { xs: 5, md: 2 },
-            mb: 6,
+            gap: { xs: 3, md: 1 },
+            mb: 4,
           }}
         >
           <StatColumn
             header="échantillon"
             info="16 mots clés"
             value="1 542 256"
-            subInfo="recherches sur google"
+            subInfo="recherches google"
           />
+          <StatColumn header="période" info="nov. 2023" info2="nov. 2024" />
           <StatColumn
-            header="période"
-            info="de novembre 2023"
-            info2="à novembre 2024"
-          />
-          <StatColumn
-            header="zone géographique"
+            header="zone"
             info="france"
             info2="espagne"
             info3="italie"
           />
         </Box>
+
         <Button
           variant="contained"
           onClick={onOpen}
           sx={{
             background: "linear-gradient(135deg, #641BFB, #171FE5)",
             borderRadius: "50px",
-            padding: { xs: "15px 60px", md: "18px 110px" },
-            fontSize: "17px",
+            padding: { xs: "12px 50px", md: "14px 80px" }, // Bouton moins massif
+            fontSize: "15px",
             fontWeight: 700,
             textTransform: "none",
+            boxShadow: "0 8px 20px rgba(100, 27, 251, 0.2)",
           }}
         >
           Ouvrir
@@ -268,7 +272,7 @@ const Dashboard = ({ onBack, isBlurred }) => {
               <Box
                 component="img"
                 src="/bigapplogo.png"
-                sx={{ height: "35px" }}
+                sx={{ height: "30px", objectFit: "contain" }}
               />
             )}
             <IconButton
@@ -301,9 +305,9 @@ const Dashboard = ({ onBack, isBlurred }) => {
                   bgcolor: "#260a69",
                   color: "white",
                   fontFamily: "Arial Black",
-                  fontSize: "18px",
-                  py: 1.5,
-                  borderRadius: "20px",
+                  fontSize: "16px",
+                  py: 1.2,
+                  borderRadius: "15px",
                   textTransform: "none",
                 }}
               >
@@ -341,7 +345,7 @@ const Dashboard = ({ onBack, isBlurred }) => {
                       <Typography
                         sx={{
                           fontFamily: "Neue Haas Grotesk Text Pro",
-                          fontSize: activeTab === cat ? "16px" : "15px",
+                          fontSize: activeTab === cat ? "15px" : "14px",
                           fontWeight: activeTab === cat ? 600 : 400,
                           color: "white",
                           whiteSpace: "nowrap",
@@ -353,7 +357,7 @@ const Dashboard = ({ onBack, isBlurred }) => {
                         {cat}
                       </Typography>
                       <ChevronRightIcon
-                        sx={{ color: "white", fontSize: "18px", flexShrink: 0 }}
+                        sx={{ color: "white", fontSize: "16px", flexShrink: 0 }}
                       />
                     </>
                   ) : (
@@ -391,15 +395,7 @@ const Dashboard = ({ onBack, isBlurred }) => {
           >
             <LogoutIcon sx={{ mr: isSidebarOpen ? 2 : 0 }} />
             {isSidebarOpen && (
-              <Typography
-                sx={{
-                  fontFamily: "Neue Haas Grotesk Text Pro",
-                  fontSize: "14px",
-                  fontWeight: 500,
-                }}
-              >
-                Quitter l'étude
-              </Typography>
+              <Typography sx={{ fontSize: "13px" }}>Quitter l'étude</Typography>
             )}
           </Box>
         </Box>
@@ -416,7 +412,7 @@ const Dashboard = ({ onBack, isBlurred }) => {
           height: "100%",
         }}
       >
-        {/* TOPBAR & PROFIL CONTAINER */}
+        {/* TOPBAR & PROFIL */}
         <Box
           sx={{
             display: "flex",
@@ -428,7 +424,6 @@ const Dashboard = ({ onBack, isBlurred }) => {
             flexShrink: 0,
           }}
         >
-          {/* BARRE D'INFOS #F0F1FC (Toujours à gauche, largeur flexible) */}
           <Box
             sx={{
               bgcolor: "#F0F1FC",
@@ -440,18 +435,27 @@ const Dashboard = ({ onBack, isBlurred }) => {
               alignItems: "center",
               border: "1px solid #E0E4EC",
               gap: 4,
-              overflowX: "auto", // Scroll horizontal si trop petit
-              scrollbarWidth: "none",
-              "&::-webkit-scrollbar": { display: "none" },
+              overflowX: "auto",
+              scrollbarWidth: "thin",
+              scrollbarColor: "#7D4DE8 transparent",
+              "&::-webkit-scrollbar": { height: "3px" },
+              "&::-webkit-scrollbar-track": {
+                background: "transparent",
+                margin: "0 100px",
+              },
+              "&::-webkit-scrollbar-thumb": {
+                background: "#7D4DE8",
+                borderRadius: "10px",
+              },
             }}
           >
             <Box
               component="img"
               src="/logo-interbio.png"
               sx={{
-                height: "45px",
-                width: "45px",
-                borderRadius: "10px",
+                height: "40px",
+                width: "40px",
+                borderRadius: "8px",
                 flexShrink: 0,
               }}
             />
@@ -459,7 +463,7 @@ const Dashboard = ({ onBack, isBlurred }) => {
               <Typography
                 sx={{
                   fontFamily: "Neue Haas Grotesk Text Pro",
-                  fontSize: "22px",
+                  fontSize: "20px",
                   fontWeight: 600,
                   color: "#3A3784",
                   lineHeight: 1,
@@ -470,7 +474,7 @@ const Dashboard = ({ onBack, isBlurred }) => {
               </Typography>
               <Typography
                 sx={{
-                  fontSize: "14px",
+                  fontSize: "13px",
                   color: "#3A3784",
                   opacity: 0.7,
                   whiteSpace: "nowrap",
@@ -485,7 +489,7 @@ const Dashboard = ({ onBack, isBlurred }) => {
               flexItem
               sx={{
                 borderColor: "#947AD8",
-                height: "35px",
+                height: "30px",
                 alignSelf: "center",
                 flexShrink: 0,
               }}
@@ -500,7 +504,7 @@ const Dashboard = ({ onBack, isBlurred }) => {
               flexItem
               sx={{
                 borderColor: "#947AD8",
-                height: "35px",
+                height: "30px",
                 alignSelf: "center",
                 flexShrink: 0,
               }}
@@ -515,7 +519,7 @@ const Dashboard = ({ onBack, isBlurred }) => {
               flexItem
               sx={{
                 borderColor: "#947AD8",
-                height: "35px",
+                height: "30px",
                 alignSelf: "center",
                 flexShrink: 0,
               }}
@@ -533,7 +537,7 @@ const Dashboard = ({ onBack, isBlurred }) => {
               </Typography>
               <Typography
                 sx={{
-                  fontSize: "18px",
+                  fontSize: "16px",
                   fontWeight: 600,
                   color: "#220996",
                   whiteSpace: "nowrap",
@@ -546,8 +550,8 @@ const Dashboard = ({ onBack, isBlurred }) => {
             <Button
               sx={{
                 background: "linear-gradient(135deg, #691BFC, #171FE5)",
-                height: "48px",
-                borderRadius: "14px",
+                height: "42px",
+                borderRadius: "12px",
                 color: "white",
                 px: 2,
                 ml: "auto",
@@ -558,7 +562,7 @@ const Dashboard = ({ onBack, isBlurred }) => {
             </Button>
           </Box>
 
-          {/* ENCART PROFIL BLANC (Toujours à droite, largeur fixe) */}
+          {/* PROFIL */}
           <Box
             sx={{
               bgcolor: "white",
@@ -570,7 +574,6 @@ const Dashboard = ({ onBack, isBlurred }) => {
               border: "1px solid #E0E4EC",
               height: "100%",
               flexShrink: 0,
-              width: "fit-content",
             }}
           >
             <Badge
@@ -581,19 +584,19 @@ const Dashboard = ({ onBack, isBlurred }) => {
                 "& .MuiBadge-badge": {
                   bgcolor: "#44b700",
                   border: "2px solid white",
-                  width: 12,
-                  height: 12,
+                  width: 10,
+                  height: 10,
                   borderRadius: "50%",
                 },
               }}
             >
-              <Avatar src="/momo.png" sx={{ width: 48, height: 48 }} />
+              <Avatar src="/momo.png" sx={{ width: 42, height: 42 }} />
             </Badge>
             <Box sx={{ flexShrink: 0 }}>
               <Typography
                 sx={{
                   fontFamily: "Neue Haas Grotesk Text Pro",
-                  fontSize: "18px",
+                  fontSize: "17px",
                   fontWeight: 700,
                   color: "#1F203B",
                   lineHeight: 1.1,
@@ -604,13 +607,13 @@ const Dashboard = ({ onBack, isBlurred }) => {
               </Typography>
               <Typography
                 sx={{
-                  fontSize: "14px",
+                  fontSize: "13px",
                   color: "#1F203B",
                   opacity: 0.8,
                   whiteSpace: "nowrap",
                 }}
               >
-                Administrateur
+                Admin
               </Typography>
             </Box>
             <Box
@@ -639,21 +642,21 @@ const Dashboard = ({ onBack, isBlurred }) => {
           </Box>
         </Box>
 
-        {/* ZONE CONTENU PRINCIPAL */}
+        {/* ZONE BLANCHE CENTRALE */}
         <Box
           sx={{
             flexGrow: 1,
             bgcolor: "white",
             borderRadius: "35px",
             p: 4,
-            boxShadow: "0 10px 40px rgba(0,0,0,0.03)",
+            boxShadow: "0 10px 40px rgba(0,0,0,0.02)",
             border: "1px solid #E0E4EC",
             overflowY: "auto",
             minHeight: 0,
           }}
         >
           <Typography
-            variant="h5"
+            variant="h6"
             sx={{ color: "#3A3784", fontWeight: 700, mb: 1 }}
           >
             {activeTab}
@@ -724,34 +727,34 @@ function StatColumn({ header, info, value, subInfo, info2, info3 }) {
       <Typography
         sx={{
           color: "#3A3784",
-          fontSize: "16px",
+          fontSize: "14px",
           fontWeight: 800,
-          mb: 2,
-          minHeight: "40px",
+          mb: 1.5,
+          minHeight: "35px",
         }}
       >
         {header}
       </Typography>
-      <Typography sx={{ color: "#7070AA", fontSize: "14px" }}>
+      <Typography sx={{ color: "#7070AA", fontSize: "13px" }}>
         {info}
       </Typography>
       <Divider
-        sx={{ width: "130px", my: 1.5, borderColor: "rgba(58, 55, 132, 0.15)" }}
+        sx={{ width: "100px", my: 1, borderColor: "rgba(58, 55, 132, 0.1)" }}
       />
       {value && (
         <Typography
-          sx={{ color: "#7070AA", fontSize: "15px", fontWeight: 800 }}
+          sx={{ color: "#7070AA", fontSize: "14px", fontWeight: 800 }}
         >
           {value}
         </Typography>
       )}
       {subInfo && (
-        <Typography sx={{ color: "#7070AA", fontSize: "11px" }}>
+        <Typography sx={{ color: "#7070AA", fontSize: "10px" }}>
           {subInfo}
         </Typography>
       )}
       {info2 && (
-        <Typography sx={{ color: "#7070AA", fontSize: "14px" }}>
+        <Typography sx={{ color: "#7070AA", fontSize: "13px" }}>
           {info2}
         </Typography>
       )}
@@ -759,12 +762,12 @@ function StatColumn({ header, info, value, subInfo, info2, info3 }) {
         <>
           <Divider
             sx={{
-              width: "130px",
-              my: 1.5,
-              borderColor: "rgba(58, 55, 132, 0.15)",
+              width: "100px",
+              my: 1,
+              borderColor: "rgba(58, 55, 132, 0.1)",
             }}
           />
-          <Typography sx={{ color: "#7070AA", fontSize: "14px" }}>
+          <Typography sx={{ color: "#7070AA", fontSize: "13px" }}>
             {info3}
           </Typography>
         </>
