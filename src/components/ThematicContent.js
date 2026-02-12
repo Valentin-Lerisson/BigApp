@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Typography, Button, Grid, Paper, Stack } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
+// Import de tes composants atomiques
 import AudienceButton from "./AudienceButton";
 import StudyTabHeader from "./StudyTabHeader";
 import SidebarInsights from "./SidebarInsights";
 import AudienceCard from "./AudienceCard";
 
-const GlobalStudyContent = ({ activeNetwork, setActiveNetwork }) => {
-  const [mainTab, setMainTab] = React.useState("ensemble");
-  const [insightTab, setInsightTab] = React.useState("volume");
+const ThematicContent = ({ activeTab, activeNetwork, setActiveNetwork }) => {
+  const [mainTab, setMainTab] = useState("ensemble");
+  const [insightTab, setInsightTab] = useState("volume");
+  const [graphMode, setGraphMode] = useState("bar");
 
   const borderRadiusLarge = "45px";
+
+  // Reset de la vue quand on change de thématique dans la sidebar
+  useEffect(() => {
+    setActiveNetwork(null);
+    setInsightTab("volume");
+  }, [activeTab, setActiveNetwork]);
+
   const tabs =
     mainTab === "ensemble"
       ? ["volume", "carte", "nuage"]
@@ -28,8 +37,21 @@ const GlobalStudyContent = ({ activeNetwork, setActiveNetwork }) => {
     return labels[id];
   };
 
+  // LOGIQUE DE CHANGEMENT D'IMAGES
+  // On nettoie le nom de la thématique pour créer un préfixe de fichier (ex: "sante", "prix")
+  const getThematicPrefix = (name) => {
+    if (name.includes("santé")) return "sante";
+    if (name.includes("environnement")) return "env";
+    if (name.includes("praticité")) return "prat";
+    if (name.includes("prix")) return "prix";
+    return "default";
+  };
+
+  const thematicPrefix = getThematicPrefix(activeTab);
+
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%", boxSizing: "border-box" }}>
+      {/* HEADER DYNAMIQUE (Copie sidebar) */}
       <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 4 }}>
         <Typography
           sx={{
@@ -39,11 +61,12 @@ const GlobalStudyContent = ({ activeNetwork, setActiveNetwork }) => {
             color: "#3A3784",
           }}
         >
-          Vue globale de l’étude
+          {activeTab}
         </Typography>
         <HelpOutlineIcon sx={{ color: "#B0B0CC", fontSize: "26px" }} />
       </Stack>
 
+      {/* NAVIGATION BOUTONS VERTS */}
       <Grid container spacing={2} sx={{ mb: 5 }}>
         {["ensemble", "thematique"].map((type) => (
           <Grid item xs={12} sm={6} key={type}>
@@ -84,7 +107,6 @@ const GlobalStudyContent = ({ activeNetwork, setActiveNetwork }) => {
           sx={{ display: "flex", flexDirection: "column", gap: 3 }}
         >
           <Box sx={{ display: "flex", flexDirection: "column" }}>
-            {/* Les onglets disparaissent quand une audience est active */}
             {!activeNetwork && (
               <StudyTabHeader
                 tabs={tabs}
@@ -117,10 +139,15 @@ const GlobalStudyContent = ({ activeNetwork, setActiveNetwork }) => {
                     minHeight: "400px",
                   }}
                 >
+                  {/* SOURCE D'IMAGE DYNAMIQUE */}
+                  {/* Ex: /sante-volume.png ou /prix-carte.png */}
                   <Box
                     component="img"
-                    src={`/${insightTab}.png`}
+                    src={`/${thematicPrefix}-${insightTab}.png`}
                     sx={{ width: "100%", maxWidth: "700px" }}
+                    onError={(e) => {
+                      e.target.src = `/${insightTab}.png`;
+                    }} // Fallback vers image globale si thématique non trouvée
                   />
                 </Box>
               ) : (
@@ -128,19 +155,19 @@ const GlobalStudyContent = ({ activeNetwork, setActiveNetwork }) => {
                   <AudienceCard
                     title="Âges de l’audience"
                     networkIcon={`/${activeNetwork}2.png`}
-                    chartImg={`/age-${activeNetwork}.png`}
+                    chartImg={`/age-${thematicPrefix}-${activeNetwork}.png`}
                   />
                   <AudienceCard
                     title="Le genre de l’audience"
                     networkIcon={`/${activeNetwork}2.png`}
-                    chartImg={`/genre-${activeNetwork}.png`}
+                    chartImg={`/genre-${thematicPrefix}-${activeNetwork}.png`}
                   />
                 </Stack>
               )}
             </Paper>
           </Box>
 
-          {/* Section "Quelles sont vos audiences ?" stylisée */}
+          {/* SECTION RÉSEAUX BAS DE PAGE */}
           {mainTab === "ensemble" && (
             <Paper
               elevation={0}
@@ -225,4 +252,4 @@ const GlobalStudyContent = ({ activeNetwork, setActiveNetwork }) => {
   );
 };
 
-export default GlobalStudyContent;
+export default ThematicContent;
