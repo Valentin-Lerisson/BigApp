@@ -27,7 +27,11 @@ const LandingPage = ({ onOpen }) => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          width: "100%",
+          width: {
+            xs: "85%", // Mobile : 90% de la largeur de l'écran
+            sm: "80%", // Tablette : 80%
+            md: "800px", // Desktop : On fixe une largeur max pour que ce soit élégant
+          },
           maxWidth: "850px",
           mx: "auto",
           px: 2,
@@ -57,6 +61,11 @@ const LandingPage = ({ onOpen }) => {
               letterSpacing: "-1px",
               zIndex: 2,
               position: "relative",
+              transform: {
+                xs: "translateY(50px)",
+                sm: "translateY(-30px)",
+                md: "translateY(-50px)",
+              },
             }}
           >
             Audience Insight
@@ -69,9 +78,9 @@ const LandingPage = ({ onOpen }) => {
               position: { xs: "relative", sm: "absolute" },
               mt: { xs: -1, sm: 0 },
               left: { sm: "50%" },
-              top: { sm: "-20px" },
-              transform: { sm: "translateX(-50%)" },
-              width: { xs: "80px", sm: "100px", md: "115px" },
+              top: { sm: "30px" },
+              transform: { sm: "translateX(-50%)", xs: "translateY(70px)" },
+              width: { xs: "80px", sm: "100px", md: "150px" },
               opacity: 0.9,
               zIndex: 1,
             }}
