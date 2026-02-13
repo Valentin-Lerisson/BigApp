@@ -7,17 +7,16 @@ const AudienceButton = ({ icon, text, active, onClick }) => (
     sx={{
       display: "flex",
       alignItems: "center",
-      p: "10px 16px",
+      p: "10px 20px",
       borderRadius: "20px",
       cursor: "pointer",
       transition: "all 0.3s ease",
       width: "100%",
-      height: "54px",
+      height: "60px", // Un peu plus haut pour le texte en 16px
       boxSizing: "border-box",
-      // État Actif (Violet) vs Inactif (Clair)
       bgcolor: active ? "#5329C2" : "#EADEFE",
       color: active ? "white" : "#5329C2",
-      boxShadow: active ? "0 10px 20px rgba(83, 41, 194, 0.3)" : "none",
+      boxShadow: active ? "0 10px 20px rgba(83, 41, 194, 0.2)" : "none",
       border: "1px solid",
       borderColor: active ? "#5329C2" : "rgba(83, 41, 194, 0.1)",
       "&:hover": {
@@ -30,8 +29,8 @@ const AudienceButton = ({ icon, text, active, onClick }) => (
       component="img"
       src={icon}
       sx={{
-        width: 22,
-        height: 22,
+        width: 28, // Légèrement plus grand pour aller avec le texte 16px
+        height: 28,
         flexShrink: 0,
         filter: active ? "brightness(0) invert(1)" : "none",
       }}
@@ -40,8 +39,8 @@ const AudienceButton = ({ icon, text, active, onClick }) => (
       orientation="vertical"
       flexItem
       sx={{
-        mx: 1.5,
-        height: "18px",
+        mx: 2,
+        height: "22px",
         alignSelf: "center",
         borderColor: active
           ? "rgba(255,255,255,0.3)"
@@ -51,8 +50,9 @@ const AudienceButton = ({ icon, text, active, onClick }) => (
     <Typography
       sx={{
         fontFamily: "Neue Haas Grotesk Text Pro",
-        fontSize: "12px",
-        fontWeight: 600,
+        fontSize: "16px", // TAILLE DEMANDÉE
+        fontWeight: 500, // PAS EN GRAS
+        lineHeight: 1.2,
       }}
     >
       {text}

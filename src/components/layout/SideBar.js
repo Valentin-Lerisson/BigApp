@@ -5,6 +5,9 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import LogoutIcon from "@mui/icons-material/Logout";
 
+// Import pour que la sidebar sache quelles thématiques existent
+import { studyConfig } from "../../config/studyConfig";
+
 const Sidebar = ({
   isSidebarOpen,
   setIsSidebarOpen,
@@ -12,13 +15,8 @@ const Sidebar = ({
   setActiveTab,
   onBack,
 }) => {
-  const categories = [
-    "Vue Globale : Le bio",
-    "Thématique 1 : Le prix",
-    "Thématique 3 : Le goût et le plaisir",
-    "Thématique 4 : Le prix",
-    "Comparaisons",
-  ];
+  // On récupère les clés dynamiquement pour ne pas avoir à les réécrire
+  const categories = [...Object.keys(studyConfig), "Comparaisons"];
 
   return (
     <Box
@@ -26,7 +24,7 @@ const Sidebar = ({
         width: isSidebarOpen ? "300px" : "80px",
         display: "flex",
         flexDirection: "column",
-        height: "calc(100vh - 32px)",
+        height: "auto",
         transition: "width 0.4s ease",
         borderRadius: "35px",
         overflow: "hidden",
@@ -34,6 +32,7 @@ const Sidebar = ({
         flexShrink: 0,
       }}
     >
+      {/* HEADER PURPLE FONCÉ */}
       <Box sx={{ bgcolor: "#5D30C3", p: "25px 20px" }}>
         <Box
           sx={{
@@ -83,6 +82,7 @@ const Sidebar = ({
                 py: 1.2,
                 borderRadius: "15px",
                 textTransform: "none",
+                "&:hover": { bgcolor: "#1a074d" },
               }}
             >
               Audience Insight
@@ -90,6 +90,8 @@ const Sidebar = ({
           </Box>
         )}
       </Box>
+
+      {/* BODY PURPLE CLAIR */}
       <Box
         sx={{
           bgcolor: "#7D4DE8",
@@ -99,7 +101,13 @@ const Sidebar = ({
           flexDirection: "column",
         }}
       >
-        <Box sx={{ flexGrow: 1 }}>
+        <Box
+          sx={{
+            flexGrow: 1,
+            overflowY: "auto",
+            "&::-webkit-scrollbar": { display: "none" },
+          }}
+        >
           {categories.map((cat, index) => (
             <Box key={cat} sx={{ minWidth: 0 }}>
               <Box
@@ -111,7 +119,9 @@ const Sidebar = ({
                   p: "12px 10px",
                   cursor: "pointer",
                   borderRadius: "7px",
+                  // Couleur de sélection fixe verte
                   bgcolor: activeTab === cat ? "#8DC53E" : "transparent",
+                  transition: "background-color 0.2s",
                 }}
               >
                 {isSidebarOpen ? (
@@ -125,6 +135,7 @@ const Sidebar = ({
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         flexGrow: 1,
+                        fontWeight: activeTab === cat ? 700 : 400,
                       }}
                     >
                       {cat}
@@ -154,15 +165,20 @@ const Sidebar = ({
             </Box>
           ))}
         </Box>
+
+        {/* FOOTER / QUITTER */}
         <Box
           sx={{
             mt: "auto",
             pt: 2,
+            pb: 1,
             display: "flex",
+            alignItems: "center",
             justifyContent: isSidebarOpen ? "flex-start" : "center",
             p: 1,
             cursor: "pointer",
             color: "white",
+            "&:hover": { opacity: 0.8 },
           }}
           onClick={onBack}
         >

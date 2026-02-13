@@ -1,19 +1,23 @@
 import React, { useState } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
-// IMPORTS COMPOSANTS
-import LandingPage from "./components/LandingPage";
-import SideBar from "./components/SideBar";
-import Topbar from "./components/Topbar";
-import ProfileBar from "./components/ProfileBar";
-import GlobalStudyContent from "./components/GlobalStudyContent";
-import ThematicContent from "./components/ThematicContent";
-import ComparisonContent from "./components/ComparisonContent";
-import PaginationFooter from "./components/PaginationFooter";
+// 1. IMPORTS DU LAYOUT
+import SideBar from "./components/layout/SideBar";
+import Topbar from "./components/layout/Topbar";
+import ProfileBar from "./components/layout/ProfileBar";
+import PaginationFooter from "./components/layout/PaginationFooter";
+
+// 2. IMPORTS DES VIEWS
+import LandingPage from "./components/views/LandingPage";
+import StudyTemplate from "./components/views/StudyTemplate"; // Le moteur unique dynamique
+import ComparisonContent from "./components/views/ComparisonContent";
 
 export default function App() {
   const [view, setView] = useState("landing");
-  const [activeTab, setActiveTab] = useState("Vue Globale : Le bio");
+
+  // Correction de la casse pour correspondre à la clé exacte de studyConfig
+  const [activeTab, setActiveTab] = useState("Vue Globale : Le Bio");
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [activeNetwork, setActiveNetwork] = useState(null);
 
@@ -22,10 +26,7 @@ export default function App() {
       sx={{
         height: "100vh",
         width: "100vw",
-        display: "flex",
         bgcolor: "#f0f2f9",
-        p: 3,
-        boxSizing: "border-box",
         overflow: "hidden",
         position: "relative",
       }}
@@ -33,18 +34,24 @@ export default function App() {
       <style>
         {`
           @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@400;500;600;700&display=swap');
-          body { margin: 0; padding: 0; overflow: hidden; }
+          body { margin: 0; padding: 0; overflow: hidden; background-color: #f0f2f9; }
         `}
       </style>
 
-      {/* DASHBOARD CONTAINER */}
+      {/* DASHBOARD CONTAINER - SCALING GLOBAL 75% */}
       <Box
         sx={{
-          width: "100%",
-          height: "100%",
+          width: "133.333vw",
+          height: "133.333vh",
           display: "flex",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          transform: "scale(0.75)",
+          transformOrigin: "top left",
+          p: 3,
+          boxSizing: "border-box",
           filter: view === "landing" ? "blur(20px)" : "none",
-          transform: view === "landing" ? "scale(1.02)" : "scale(1)",
           transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
           pointerEvents: view === "landing" ? "none" : "auto",
         }}
@@ -55,22 +62,24 @@ export default function App() {
           activeTab={activeTab}
           setActiveTab={(tab) => {
             setActiveTab(tab);
-            setActiveNetwork(null);
+            setActiveNetwork(null); // Reset l'audience lors d'un changement d'onglet
           }}
           onBack={() => setView("landing")}
+          sx={{ height: "100%" }}
         />
 
         <Box
           sx={{
             flexGrow: 1,
             ml: 3,
-            mr: 1.5, // <--- MARGE À DROITE RÉDUITE ICI (Passage de 4 à 1.5)
+            mr: 1.5,
             display: "flex",
             flexDirection: "column",
             minWidth: 0,
             height: "100%",
           }}
         >
+          {/* TOPBAR & PROFILE */}
           <Box
             sx={{
               display: "flex",
@@ -84,16 +93,18 @@ export default function App() {
             <ProfileBar />
           </Box>
 
+          {/* CONTENEUR BLANC GLASSMORPHISM */}
           <Box
             sx={{
               flexGrow: 1,
               display: "flex",
               flexDirection: "column",
-              bgcolor: "rgba(255, 255, 255, 0.4)",
-              backdropFilter: "blur(12px)",
-              borderRadius: "45px",
-              border: "1px solid rgba(255, 255, 255, 0.6)",
+              bgcolor: "rgba(255, 255, 255, 0.45)",
+              backdropFilter: "blur(15px)",
+              borderRadius: "55px",
+              border: "1px solid rgba(255, 255, 255, 0.7)",
               overflow: "hidden",
+              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.1)",
             }}
           >
             <Box
@@ -102,33 +113,25 @@ export default function App() {
                 overflowY: "auto",
                 display: "flex",
                 flexDirection: "column",
-                "&::-webkit-scrollbar": { width: "6px" },
+                minHeight: 0,
+                "&::-webkit-scrollbar": { width: "8px" },
                 "&::-webkit-scrollbar-thumb": {
-                  background: "rgba(58, 55, 132, 0.1)",
+                  background: "rgba(58, 55, 132, 0.15)",
                   borderRadius: "10px",
                 },
               }}
             >
-              <Box sx={{ p: 4, flexGrow: 1 }}>
-                {/* LOGIQUE D'AFFICHAGE SÉCURISÉE */}
-
-                {activeTab === "Vue Globale : Le bio" && (
-                  <GlobalStudyContent
+              {/* ZONE DE CONTENU DYNAMIQUE UNIQUE */}
+              <Box sx={{ p: 5, flex: 1 }}>
+                {activeTab === "Comparaisons" ? (
+                  <ComparisonContent />
+                ) : (
+                  <StudyTemplate
                     activeTab={activeTab}
                     activeNetwork={activeNetwork}
                     setActiveNetwork={setActiveNetwork}
                   />
                 )}
-
-                {activeTab.includes("Thématique") && (
-                  <ThematicContent
-                    activeTab={activeTab}
-                    activeNetwork={activeNetwork}
-                    setActiveNetwork={setActiveNetwork}
-                  />
-                )}
-
-                {activeTab === "Comparaisons" && <ComparisonContent />}
               </Box>
 
               <PaginationFooter />
@@ -150,7 +153,7 @@ export default function App() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            bgcolor: "rgba(240, 242, 249, 0.3)",
+            bgcolor: "rgba(240, 242, 249, 0.2)",
             backdropFilter: "blur(5px)",
           }}
         >

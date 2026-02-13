@@ -115,7 +115,7 @@ const LandingPage = ({ onOpen }) => {
               mb: { xs: 4, sm: 6 },
             }}
           >
-            Étude InterBio
+            Étude Internbio
           </Typography>
 
           {/* Section Stats Grid */}
